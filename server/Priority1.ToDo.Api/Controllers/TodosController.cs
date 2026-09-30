@@ -17,9 +17,9 @@ public class TodosController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<TodoItem>>> GetAll(CancellationToken ct)
+    public async Task<ActionResult<List<TodoItem>>> GetAll([FromQuery] int todoListId, CancellationToken ct)
     {
-        var todos = await _todoService.GetAllAsync(ct);
+        var todos = await _todoService.GetAllAsync(todoListId, ct);
         return Ok(todos.Select(TodoItem.From));
     }
 

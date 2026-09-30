@@ -8,7 +8,7 @@ public abstract class EntityBase
     public int Id { get; set; }
     [Required]
     [MaxLength(200)]
-    public string Title { get; set; } = string.Empty;
+    public string Title { get; set; } = "";
     public DateTime CreateDate { get; set; }
     public DateTime UpdateDate { get; set; }
 }
