@@ -9,7 +9,7 @@ export function useTodos({
     setTodos,
     setError,
 }) {
-    async function handleAdd(title) {
+    async function handleAdd(title, dueDate) {
         if (selectedTodoListId === null) {
             return;
         }
@@ -18,6 +18,7 @@ export function useTodos({
             const created = await createTodo({
                 title,
                 todoListId: selectedTodoListId,
+                dueDate
             });
 
             setTodos((prev) => [...prev, created]);
@@ -31,6 +32,7 @@ export function useTodos({
             const updated = await updateTodo(todo.id, {
                 title: todo.title,
                 isComplete: !todo.isComplete,
+                dueDate: todo.dueDate
             });
 
             setTodos((prev) =>
@@ -48,6 +50,7 @@ export function useTodos({
             const updated = await updateTodo(todo.id, {
                 title,
                 isComplete: todo.isComplete,
+                dueDate: todo.dueDate
             });
 
             setTodos((prev) =>

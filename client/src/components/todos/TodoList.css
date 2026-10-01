@@ -1,0 +1,21 @@
+.todo-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px;
+    border-bottom: 1px solid #ccc;
+}
+
+.todo-content {
+    flex: 1;
+}
+
+.todo-content .due-date {
+    margin-left: 10px;
+}
+
+.todo-item__actions {
+    display: flex;
+    gap: 8px;
+    margin-left: auto;
+}

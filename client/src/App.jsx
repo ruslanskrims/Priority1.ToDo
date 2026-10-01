@@ -82,6 +82,7 @@ export default function App() {
   return (
     <div className="app">
       <h1>Priority1 ToDo</h1>
+      <h2>Create new todo list</h2>
       {error && <div className="error">{error}</div>}
       <AddTodoListForm onAdd={handleAddTodoList} />
       {selectedTodoListId && (
@@ -96,6 +97,7 @@ export default function App() {
       />
       {selectedTodoListId !== null && (
         <>
+          <h2>Create new todo</h2>
           <AddTodoForm onAdd={handleAdd} />
           {loading ? (
             <p className="muted">Loading...</p>
