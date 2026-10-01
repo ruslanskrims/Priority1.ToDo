@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Priority1.ToDo.Api", "Prior
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Priority1.ToDo.Core", "Priority1.ToDo.Core\Priority1.ToDo.Core.csproj", "{748CFEF8-347E-4539-9304-CA3A7241A1E7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Priority1.ToDo.Tests", "Priority1.ToDo.Tests\Priority1.ToDo.Tests.csproj", "{356EB962-26FA-44B7-95AA-B14C4717F861}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{748CFEF8-347E-4539-9304-CA3A7241A1E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{748CFEF8-347E-4539-9304-CA3A7241A1E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{748CFEF8-347E-4539-9304-CA3A7241A1E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{356EB962-26FA-44B7-95AA-B14C4717F861}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{356EB962-26FA-44B7-95AA-B14C4717F861}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{356EB962-26FA-44B7-95AA-B14C4717F861}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{356EB962-26FA-44B7-95AA-B14C4717F861}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
