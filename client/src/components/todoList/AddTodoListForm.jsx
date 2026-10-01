@@ -20,7 +20,7 @@ export default function AddTodoListForm({ onAdd }) {
         <form className="add-form" onSubmit={handleSubmit}>
             <input
                 type="text"
-                placeholder="New list..."
+                placeholder="Add new todo list..."
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
             />

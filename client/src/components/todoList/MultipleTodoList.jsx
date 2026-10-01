@@ -1,4 +1,4 @@
-import {MultipleTodoListItem} from './MultipleTodoListItem';
+import { MultipleTodoListItem } from './MultipleTodoListItem';
 import './MultipleTodoList.css';
 
 export default function MultipleTodoList({

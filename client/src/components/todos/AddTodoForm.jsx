@@ -15,7 +15,7 @@ export default function AddTodoForm({ onAdd }) {
     <form className="add-form" onSubmit={handleSubmit}>
       <input
         type="text"
-        placeholder="What needs doing?"
+        placeholder="Add the todo..."
         value={title}
         onChange={(e) => setTitle(e.target.value)}
       />

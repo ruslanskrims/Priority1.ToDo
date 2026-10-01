@@ -23,7 +23,7 @@ export function MultipleTodoListItem({
     }
 
     return (
-        <div className="multiple-todo-list-item">
+        <div className={`multiple-todo-list-item ${selected ? 'selected' : ''}`} onClick={() => onSelect(list.id)}>
             {editing ? (
                 <input
                     value={inputValue}
@@ -33,28 +33,28 @@ export function MultipleTodoListItem({
                 />
             ) : (
                 <div
-                    className={selected ? 'selected' : ''}
                     onClick={() => onSelect(list.id)}
                 >
                     {list.title}
                 </div>
             )}
-
-            {!editing && (
+            <div className="multiple-todo-list-item__actions">
+                {!editing && (
+                    <button
+                        type="button"
+                        onClick={() => setEditing(true)}
+                    >
+                        Edit
+                    </button>
+                )}
                 <button
                     type="button"
-                    onClick={() => setEditing(true)}
+                    onClick={() => onDelete(list)}
                 >
-                    Edit
+                    Delete
                 </button>
-            )}
+            </div>
 
-            <button
-                type="button"
-                onClick={() => onDelete(list)}
-            >
-                Delete
-            </button>
         </div>
     );
 }

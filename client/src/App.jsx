@@ -1,18 +1,14 @@
 import { useEffect, useState } from 'react';
 import {
   getTodos,
-  createTodo,
-  updateTodo,
-  deleteTodo,
   getTodoList,
-  createTodoList,
-  updateTodoList,
-  deleteTodoList,
 } from './api';
-import AddTodoForm from './components/AddTodoForm';
-import MultipleTodoList from './components/MultipleTodoList';
-import AddTodoListForm from './components/AddTodoListForm';
-import TodoList from './components/TodoList';
+import AddTodoForm from './components/todos/AddTodoForm';
+import MultipleTodoList from './components/todoList/MultipleTodoList';
+import AddTodoListForm from './components/todoList/AddTodoListForm';
+import TodoList from './components/todos/TodoList';
+import { useTodoList } from './hooks/useTodoList';
+import { useTodos } from './hooks/useTodos';
 
 export default function App() {
   const [todos, setTodos] = useState([]);
@@ -20,6 +16,30 @@ export default function App() {
   const [selectedTodoListId, setSelectedTodoListId] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const {
+    handleAddTodoList,
+    handleRenameTodoList,
+    handleDeleteTodoList,
+  } = useTodoList({
+    todoList,
+    setTodoList,
+    selectedTodoListId,
+    setSelectedTodoListId,
+    setTodos,
+    setError,
+  });
+
+  const {
+    handleAdd,
+    handleToggle,
+    handleRename,
+    handleDelete,
+  } = useTodos({
+    selectedTodoListId,
+    setTodos,
+    setError,
+  });
 
   useEffect(() => {
     getTodoList()
@@ -57,116 +77,7 @@ export default function App() {
       });
   }, [selectedTodoListId]);
 
-  async function handleAdd(title) {
-    if (selectedTodoListId === null) {
-      return;
-    }
-
-    try {
-      const created = await createTodo({
-        title,
-        todoListId: selectedTodoListId,
-      });
-
-      setTodos((prev) => [...prev, created]);
-    } catch (e) {
-      setError(e.message);
-    }
-  }
-
-  async function handleToggle(todo) {
-    try {
-      const updated = await updateTodo(todo.id, {
-        title: todo.title,
-        isComplete: !todo.isComplete,
-      });
-
-      setTodos((prev) =>
-        prev.map((item) =>
-          item.id === updated.id ? updated : item
-        )
-      );
-    } catch (e) {
-      setError(e.message);
-    }
-  }
-
-  async function handleRename(todo, title) {
-    try {
-      const updated = await updateTodo(todo.id, {
-        title,
-        isComplete: todo.isComplete,
-      });
-
-      setTodos((prev) =>
-        prev.map((item) =>
-          item.id === updated.id ? updated : item
-        )
-      );
-    } catch (e) {
-      setError(e.message);
-    }
-  }
-
-  async function handleDelete(todo) {
-    try {
-      await deleteTodo(todo.id);
-
-      setTodos((prev) =>
-        prev.filter((item) => item.id !== todo.id)
-      );
-    } catch (e) {
-      setError(e.message);
-    }
-  }
-
-  async function handleAddTodoList(title) {
-    try {
-      const created = await createTodoList({ title });
-
-      setTodoList((prev) => [...prev, created]);
-      setSelectedTodoListId(created.id);
-    } catch (e) {
-      setError(e.message);
-    }
-  }
-
-  async function handleRenameTodoList(list, title) {
-    try {
-      const updated = await updateTodoList(list.id, { title });
-
-      setTodoList((prev) =>
-        prev.map((item) =>
-          item.id === updated.id ? updated : item
-        )
-      );
-    } catch (e) {
-      setError(e.message);
-    }
-  }
-
-  async function handleDeleteTodoList(list) {
-    try {
-      await deleteTodoList(list.id);
-
-      const remainingLists = todoList.filter(
-        (item) => item.id !== list.id
-      );
-
-      setTodoList(remainingLists);
-
-      if (list.id === selectedTodoListId) {
-        if (remainingLists.length > 0) {
-          setSelectedTodoListId(remainingLists[0].id);
-        } else {
-          setSelectedTodoListId(null);
-          setTodos([]);
-        }
-      }
-    } catch (e) {
-      setError(e.message);
-    }
-  }
+  const selectedTodoList = todoList.find((list) => list.id === selectedTodoListId);
 
   return (
     <div className="app">
@@ -174,7 +85,7 @@ export default function App() {
       {error && <div className="error">{error}</div>}
       <AddTodoListForm onAdd={handleAddTodoList} />
       {selectedTodoListId && (
-        <span>You have selected todo list: {todoList.find((item) => item.id === selectedTodoListId).title}</span>
+        <h3>You have selected todo list: {selectedTodoList?.title}</h3>
       )}
       <MultipleTodoList
         todoList={todoList}
