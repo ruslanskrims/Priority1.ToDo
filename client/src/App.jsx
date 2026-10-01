@@ -33,7 +33,7 @@ export default function App() {
   const {
     handleAdd,
     handleToggle,
-    handleRename,
+    handleUpdate,
     handleDelete,
   } = useTodos({
     selectedTodoListId,
@@ -105,7 +105,7 @@ export default function App() {
             <TodoList
               todos={todos}
               onToggle={handleToggle}
-              onRename={handleRename}
+              handleUpdate={handleUpdate}
               onDelete={handleDelete}
             />
           )}

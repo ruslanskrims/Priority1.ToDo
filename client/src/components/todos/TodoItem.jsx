@@ -1,18 +1,29 @@
 import { useState } from 'react';
 
-export default function TodoItem({ todo, onToggle, onRename, onDelete }) {
+export default function TodoItem({ todo, onToggle, onUpdate, onDelete }) {
   const [editing, setEditing] = useState(false);
   const [draft, setDraft] = useState(todo.title);
-
+  const [draftDueDate, setDraftDueDate] = useState(todo.dueDate || '');
+  
   function saveEdit() {
     const trimmed = draft.trim();
 
-    if (trimmed && trimmed !== todo.title) {
-      onRename(todo, trimmed);
-    } else {
-      setDraft(todo.title);
+    if (!trimmed) {
+      return;
     }
 
+    onUpdate(
+      todo,
+      trimmed,
+      draftDueDate || null
+    );
+
+    setEditing(false);
+  }
+
+  function cancelEdit() {
+    setDraft(todo.title);
+    setDraftDueDate(todo.dueDate || '');
     setEditing(false);
   }
 
@@ -22,7 +33,6 @@ export default function TodoItem({ todo, onToggle, onRename, onDelete }) {
     }
 
     const today = new Date().toISOString().split('T')[0];
-
     return todo.dueDate < today;
   }
 
@@ -38,6 +48,7 @@ export default function TodoItem({ todo, onToggle, onRename, onDelete }) {
       />
       <div className="todo-content">
         {editing ? (
+          <>
           <input
             className="edit-title"
             value={draft}
@@ -54,6 +65,12 @@ export default function TodoItem({ todo, onToggle, onRename, onDelete }) {
               }
             }}
           />
+          <input
+              type="date"
+              value={draftDueDate}
+              onChange={(e) => setDraftDueDate(e.target.value)}
+            />
+            </>
         ) : (
           <span
             className={`title ${todo.isComplete ? 'complete' : ''}`}
@@ -64,13 +81,17 @@ export default function TodoItem({ todo, onToggle, onRename, onDelete }) {
           </span>
         )}
         {todo.dueDate && (
-          <span>
-            Due: {todo.dueDate}
-            {overdue && 'Overdue'}
+          <span className='todo-item__due-date'>
+            {overdue ? (
+              <span className="todo-item__overdue-text">Overdue</span>
+            ) : (
+              <span className="todo-item__due-text">
+                Due: {todo.dueDate}
+              </span>
+            )}
           </span>
         )}
       </div>
-
       <div className='todo-item__actions'>
         {!editing && (
           <button onClick={() => setEditing(true)}>

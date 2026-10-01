@@ -1,0 +1,3 @@
+button.primary:disabled, button.primary:disabled:hover {
+    background-color: gray;
+}

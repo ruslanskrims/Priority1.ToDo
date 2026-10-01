@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import './AddTodoForm.css';
 
 export default function AddTodoForm({ onAdd }) {
   const [title, setTitle] = useState('');
@@ -28,7 +29,7 @@ export default function AddTodoForm({ onAdd }) {
         value={dueDate}
         onChange={(e) => setDueDate(e.target.value)}
       />
-      <button type="submit" className="primary">
+      <button type="submit" className="primary" disabled={!title.trim() || !dueDate}>
         Add
       </button>
     </form>

@@ -45,12 +45,12 @@ export function useTodos({
         }
     }
 
-    async function handleRename(todo, title) {
+    async function handleUpdate(todo, title, dueDate) {
         try {
             const updated = await updateTodo(todo.id, {
                 title,
                 isComplete: todo.isComplete,
-                dueDate: todo.dueDate
+                dueDate,
             });
 
             setTodos((prev) =>
@@ -78,7 +78,7 @@ export function useTodos({
     return {
         handleAdd,
         handleToggle,
-        handleRename,
+        handleUpdate,
         handleDelete,
     };
 }
