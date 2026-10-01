@@ -11,7 +11,7 @@
     flex: 1;
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 12px;
     min-width: 0;
 }
 
@@ -55,3 +55,13 @@
   color: #d9534f;
   font-weight: 600;
 }
+
+.edit-title {
+    flex: 1;
+    min-width: 100px;
+}
+
+.edit-due-date {
+    flex-shrink: 0;
+}
+

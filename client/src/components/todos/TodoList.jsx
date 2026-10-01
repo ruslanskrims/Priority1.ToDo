@@ -4,6 +4,8 @@ import './TodoList.css';
 
 export default function TodoList({ todos, onToggle, onUpdate, onDelete }) {
   const [sortBy, setSortBy] = useState('createDate');
+  const [editingTodoId, setEditingTodoId] = useState(null);
+
   if (todos?.length === 0) {
     return <p className="muted">No todos yet. Add one above.</p>;
   }
@@ -30,7 +32,6 @@ export default function TodoList({ todos, onToggle, onUpdate, onDelete }) {
         <label htmlFor="sortBy">
           Sort by:
         </label>
-
         <select
           id="sortBy"
           value={sortBy}
@@ -58,6 +59,9 @@ export default function TodoList({ todos, onToggle, onUpdate, onDelete }) {
               onToggle={onToggle}
               onUpdate={onUpdate}
               onDelete={onDelete}
+              editing={editingTodoId === todo.id}
+              onStartEdit={() => setEditingTodoId(todo.id)}
+              onFinishEdit={() => setEditingTodoId(null)}
             />
           ))}
         </ul>

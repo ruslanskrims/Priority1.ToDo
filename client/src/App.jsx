@@ -105,7 +105,7 @@ export default function App() {
             <TodoList
               todos={todos}
               onToggle={handleToggle}
-              handleUpdate={handleUpdate}
+              onUpdate={handleUpdate}
               onDelete={handleDelete}
             />
           )}
