@@ -1,3 +1,4 @@
+using Microsoft.VisualBasic;
 using Priority1.ToDo.Core.Domain;
 
 namespace Priority1.ToDo.Api.Models;
@@ -5,10 +6,11 @@ namespace Priority1.ToDo.Api.Models;
 public class TodoItem
 {
     public int Id { get; set; }
-    public string Title { get; set; }
+    public string Title { get; set; } = "";
     public bool IsComplete { get; set; }
     public DateTime CreateDate { get; set; }
     public DateTime UpdateDate { get; set; }
+    public DateOnly? DueDate { get; set; }
 
     public static TodoItem From(Todo todo)
     {
@@ -18,7 +20,8 @@ public class TodoItem
             Title = todo.Title,
             IsComplete = todo.IsComplete,
             CreateDate = todo.CreateDate,
-            UpdateDate = todo.UpdateDate
+            UpdateDate = todo.UpdateDate,
+            DueDate = todo.DueDate
         };
     }
 
@@ -30,7 +33,8 @@ public class TodoItem
             Title = Title,
             IsComplete = IsComplete,
             CreateDate = CreateDate,
-            UpdateDate = UpdateDate
+            UpdateDate = UpdateDate,
+            DueDate = DueDate
         };
     }
 }
